@@ -27,18 +27,13 @@
             z-index: 10;
         }
 
-        h1 {
-            color: #9b5de5;
-            font-size: 26px;
-            margin-bottom: 20px;
-        }
+        h1 { color: #9b5de5; font-size: 26px; margin-bottom: 20px; }
 
-        /* Styling for us.jpg */
         .photo-container img {
             width: 280px;
             height: 280px;
-            object-fit: cover; /* Keeps the photo from looking stretched */
-            border-radius: 50%; /* Makes it a circle */
+            object-fit: cover;
+            border-radius: 50%; /* Clean circular crop */
             border: 5px solid #ff85a2;
             margin-bottom: 20px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
@@ -62,26 +57,10 @@
             transition: 0.3s;
         }
 
-        #yesBtn {
-            background-color: #ff4d6d;
-            color: white;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-        }
-
-        #noBtn {
-            background-color: #ba68c8;
-            color: white;
-            position: absolute;
-        }
-
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { background-color: #ba68c8; color: white; position: absolute; }
         .hidden { display: none; }
-
-        .cute-message {
-            color: #d81b60;
-            font-size: 22px;
-            font-weight: bold;
-            line-height: 1.4;
-        }
+        .cute-message { color: #d81b60; font-size: 22px; font-weight: bold; line-height: 1.4; }
     </style>
 </head>
 <body>
@@ -101,7 +80,7 @@
         <div id="success-state" class="hidden">
             <h1 style="color: #ff4d6d;">YAYYY! ❤️</h1>
             <div class="photo-container">
-                <img src="https://media.tenor.com/7vY5H4W_M7MAAAAi/bubu-dudu-bubu.gif" alt="Bubu Dudu Happy">
+                <img src="me.png" alt="Me">
             </div>
             <p class="cute-message">
                 I knew you'd say yes! <br> 
@@ -117,16 +96,12 @@
         const askState = document.getElementById('ask-state');
         const successState = document.getElementById('success-state');
 
-        // Scatter logic for "NO"
+        // Scattering logic for the "No" button
         noBtn.addEventListener('mouseover', () => {
             const maxX = window.innerWidth - noBtn.offsetWidth - 20;
             const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-            
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
-            
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
+            noBtn.style.left = Math.floor(Math.random() * maxX) + 'px';
+            noBtn.style.top = Math.floor(Math.random() * maxY) + 'px';
             noBtn.style.position = 'fixed';
         });
 
@@ -139,7 +114,7 @@
 
         function rainHearts() {
             const symbols = ['❤️', '💜', '💖', '✨'];
-            for(let i=0; i<40; i++) {
+            for(let i=0; i<45; i++) {
                 const heart = document.createElement('div');
                 heart.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
                 heart.style.position = 'fixed';
@@ -152,10 +127,7 @@
                 const anim = heart.animate([
                     { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
                     { transform: `translateY(${window.innerHeight + 50}px) rotate(360deg)`, opacity: 0 }
-                ], { 
-                    duration: Math.random() * 3000 + 2000,
-                    easing: 'linear'
-                });
+                ], { duration: Math.random() * 3000 + 2000 });
 
                 anim.onfinish = () => heart.remove();
             }
